@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UFC Analyzer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <h1>UFC Fight Analyzer</h1>
+        <p>
+          Track fighter profiles, rate performance per fight, and log skill implementation tendencies. Use
+          the comparison tool to analyze matchups with your data.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <button id="exportData" class="secondary">Export JSON</button>
+        <label class="file-upload">
+          Import JSON
+          <input id="importData" type="file" accept="application/json" />
+        </label>
+        <button id="resetData" class="ghost">Reset Data</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="grid two-columns">
+        <div class="card">
+          <h2>Add Fighter</h2>
+          <form id="fighterForm" class="form-grid">
+            <label>
+              Name
+              <input name="name" type="text" placeholder="Fighter name" required />
+            </label>
+            <label>
+              Nickname
+              <input name="nickname" type="text" placeholder="Optional" />
+            </label>
+            <label>
+              Height (inches)
+              <input name="height_in" type="number" min="0" step="0.5" />
+            </label>
+            <label>
+              Reach (inches)
+              <input name="reach_in" type="number" min="0" step="0.5" />
+            </label>
+            <label>
+              Weight Class
+              <input name="weight_class" type="text" placeholder="Lightweight" required />
+            </label>
+            <label>
+              Stance
+              <select name="stance" required>
+                <option value="">Select stance</option>
+                <option>Orthodox</option>
+                <option>Southpaw</option>
+                <option>Switch</option>
+              </select>
+            </label>
+            <label>
+              Primary Style
+              <input name="primary_style" type="text" placeholder="Boxing, BJJ, etc." required />
+            </label>
+            <label>
+              Team/Gym
+              <input name="team" type="text" placeholder="Optional" />
+            </label>
+            <label class="full">
+              Notes
+              <textarea name="notes" rows="3" placeholder="General fighter notes"></textarea>
+            </label>
+            <button type="submit">Save Fighter</button>
+          </form>
+        </div>
+        <div class="card">
+          <h2>Fighter Roster</h2>
+          <div id="fighterList" class="list"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Add Fight Record</h2>
+        <form id="fightForm" class="form-grid">
+          <label>
+            Fighter
+            <select name="fighter_id" id="fightFighter" required></select>
+          </label>
+          <label>
+            Opponent
+            <select name="opponent_id" id="fightOpponent" required></select>
+          </label>
+          <label>
+            Event
+            <input name="event" type="text" placeholder="UFC 300" required />
+          </label>
+          <label>
+            Date
+            <input name="date" type="date" required />
+          </label>
+          <label>
+            Weight Class
+            <input name="weight_class" type="text" required />
+          </label>
+          <label>
+            Result
+            <select name="result" required>
+              <option value="">Select result</option>
+              <option>Win</option>
+              <option>Loss</option>
+              <option>Draw</option>
+              <option>NC</option>
+            </select>
+          </label>
+          <label>
+            Method
+            <input name="method" type="text" placeholder="UD, KO, Submission" required />
+          </label>
+          <label>
+            Rounds Scheduled
+            <input name="rounds_scheduled" type="number" min="1" step="1" required />
+          </label>
+          <label>
+            Rounds Completed
+            <input name="rounds_completed" type="number" min="0" step="1" required />
+          </label>
+
+          <div class="subsection full">
+            <h3>Performance Per Fight</h3>
+            <div class="form-grid nested">
+              <label>
+                Score (0-10)
+                <input name="performance_score" type="number" min="0" max="10" step="0.5" required />
+              </label>
+              <label>
+                Confidence (0-1)
+                <input name="performance_confidence" type="number" min="0" max="1" step="0.1" />
+              </label>
+              <label class="full">
+                Highlights
+                <textarea name="performance_highlights" rows="2"></textarea>
+              </label>
+            </div>
+          </div>
+
+          <div class="subsection full">
+            <h3>Skill Implementation (0-10)</h3>
+            <div class="form-grid nested">
+              <label>
+                Boxing
+                <input name="skill_boxing" type="number" min="0" max="10" step="0.5" required />
+              </label>
+              <label>
+                Kickboxing
+                <input name="skill_kickboxing" type="number" min="0" max="10" step="0.5" required />
+              </label>
+              <label>
+                Wrestling
+                <input name="skill_wrestling" type="number" min="0" max="10" step="0.5" required />
+              </label>
+              <label>
+                Clinch
+                <input name="skill_clinch" type="number" min="0" max="10" step="0.5" required />
+              </label>
+              <label>
+                Grappling
+                <input name="skill_grappling" type="number" min="0" max="10" step="0.5" required />
+              </label>
+              <label>
+                Submissions
+                <input name="skill_submissions" type="number" min="0" max="10" step="0.5" required />
+              </label>
+              <label>
+                Ground Striking
+                <input name="skill_ground_striking" type="number" min="0" max="10" step="0.5" required />
+              </label>
+              <label>
+                Footwork
+                <input name="skill_footwork" type="number" min="0" max="10" step="0.5" required />
+              </label>
+              <label class="full">
+                Notes
+                <textarea name="skill_notes" rows="2"></textarea>
+              </label>
+            </div>
+          </div>
+
+          <label class="full">
+            Fight Notes
+            <textarea name="notes" rows="3"></textarea>
+          </label>
+          <button type="submit" class="full">Save Fight</button>
+        </form>
+      </section>
+
+      <section class="grid two-columns">
+        <div class="card">
+          <h2>Fight Records</h2>
+          <div id="fightList" class="list"></div>
+        </div>
+        <div class="card">
+          <h2>Compare Fighters</h2>
+          <form id="compareForm" class="form-grid">
+            <label>
+              Fighter A
+              <select id="compareFighterA" required></select>
+            </label>
+            <label>
+              Fighter B
+              <select id="compareFighterB" required></select>
+            </label>
+            <button type="submit">Compare</button>
+          </form>
+          <div id="comparisonResult" class="comparison"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Data is stored locally in your browser. Export JSON for backups.</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

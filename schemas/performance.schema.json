@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "performance.schema.json",
+  "title": "PerformanceRating",
+  "type": "object",
+  "required": ["score"],
+  "properties": {
+    "score": { "type": "number", "minimum": 0, "maximum": 10 },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "highlights": { "type": "string" }
+  },
+  "additionalProperties": false
+}

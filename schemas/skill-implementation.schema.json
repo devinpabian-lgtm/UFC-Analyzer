@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "skill-implementation.schema.json",
+  "title": "SkillImplementation",
+  "type": "object",
+  "required": [
+    "boxing",
+    "kickboxing",
+    "wrestling",
+    "clinch",
+    "grappling",
+    "submissions",
+    "ground_striking",
+    "footwork"
+  ],
+  "properties": {
+    "boxing": { "type": "number", "minimum": 0, "maximum": 10 },
+    "kickboxing": { "type": "number", "minimum": 0, "maximum": 10 },
+    "wrestling": { "type": "number", "minimum": 0, "maximum": 10 },
+    "clinch": { "type": "number", "minimum": 0, "maximum": 10 },
+    "grappling": { "type": "number", "minimum": 0, "maximum": 10 },
+    "submissions": { "type": "number", "minimum": 0, "maximum": 10 },
+    "ground_striking": { "type": "number", "minimum": 0, "maximum": 10 },
+    "footwork": { "type": "number", "minimum": 0, "maximum": 10 },
+    "notes": { "type": "string" }
+  },
+  "additionalProperties": false
+}
