@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fighter.schema.json",
+  "title": "Fighter",
+  "type": "object",
+  "required": ["id", "name", "height_in", "reach_in", "weight_class", "stance", "primary_style"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "nickname": { "type": "string" },
+    "height_in": { "type": "number", "minimum": 0 },
+    "reach_in": { "type": "number", "minimum": 0 },
+    "weight_class": { "type": "string" },
+    "stance": { "type": "string" },
+    "primary_style": { "type": "string" },
+    "team": { "type": "string" },
+    "notes": { "type": "string" }
+  },
+  "additionalProperties": false
+}

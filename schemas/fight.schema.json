@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fight.schema.json",
+  "title": "Fight",
+  "type": "object",
+  "required": [
+    "id",
+    "fighter_id",
+    "opponent_id",
+    "event",
+    "date",
+    "weight_class",
+    "result",
+    "method",
+    "rounds_scheduled",
+    "rounds_completed",
+    "performance",
+    "skill_implementation"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "fighter_id": { "type": "string" },
+    "opponent_id": { "type": "string" },
+    "event": { "type": "string" },
+    "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "weight_class": { "type": "string" },
+    "result": { "type": "string", "enum": ["Win", "Loss", "Draw", "NC"] },
+    "method": { "type": "string" },
+    "rounds_scheduled": { "type": "number", "minimum": 1 },
+    "rounds_completed": { "type": "number", "minimum": 0 },
+    "performance": { "$ref": "performance.schema.json" },
+    "skill_implementation": { "$ref": "skill-implementation.schema.json" },
+    "notes": { "type": "string" }
+  },
+  "additionalProperties": false
+}
