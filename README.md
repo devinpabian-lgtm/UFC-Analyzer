@@ -1,76 +1,43 @@
-# UFC Analyzer
+# UFC Intelligence Hub
 
-A lightweight UFC fight analyzer you can use in the browser. The goal is to capture:
+A live UFC knowledge website that aggregates public information from UFC media pages, community channels, and optional betting providers into one dashboard.
 
-- **Fighter profile data** (name, physical attributes, style, etc.).
-- **Fight-by-fight performance scores** (subjective ratings you assign).
-- **Skill implementation intent** (how often the fighter tried to use certain tools).
-- **Head-to-head comparisons** based on your stored data.
+## What this version includes
 
-This repo includes a local web app, a data model, and JSON schemas for validating exports.
+- **Breaking news ingestion** from UFC.com news.
+- **Fight announcement tracker** from UFC.com events.
+- **Rankings tracker** from UFC.com rankings.
+- **Betting markets module** (integrated with The Odds API when `ODDS_API_KEY` is set).
+- **Fan interaction feed** via Reddit MMA/UFC RSS.
+- **Frontend hub UI** for quick monitoring and refresh.
 
-## Quick Start
+## Architecture
 
-### Option A: One-command launcher (recommended)
+- `backend/app.py`: stdlib HTTP server that exposes `/api/dashboard` and serves the UI.
+- `backend/scrapers.py`: source adapters and payload builder.
+- `app/index.html`, `app/styles.css`, `app/script.js`: dashboard UI.
 
-```bash
-./run-app.sh
-```
-
-Then open: `http://127.0.0.1:8000/index.html`
-
-> You can change the port by setting `PORT=9000 ./run-app.sh`.
-
-### Option B: Open the file directly
-
-Open `app/index.html` in your browser.
-
-### Option C: Run your own local server
+## Run locally
 
 ```bash
-python -m http.server 8000 --directory app
+./runapp
 ```
 
-Then open: `http://127.0.0.1:8000/index.html`
+Then open:
 
-## Using the App
+- `http://127.0.0.1:8000`
 
-1. Add fighters in the **Add Fighter** form.
-2. Record fights in **Add Fight Record**.
-3. Use **Compare Fighters** to analyze matchup tendencies.
-4. Export JSON for backups or share with other devices.
+## Optional live odds
 
-> Data is stored locally in your browser (localStorage).
+Set your API key before starting:
 
-## Core Concepts
+```bash
+export ODDS_API_KEY="your_key_here"
+./runapp
+```
 
-### 1) Fighter Profile
-Each fighter has a single profile that includes static details (name, height, reach, stance) and optional notes.
+## Notes on scraping
 
-### 2) Fight Record
-A fight record links two fighters, the event metadata (date, opponent, result), and two "buckets":
-
-- **Performance Per Fight**: subjective rating (0–10) of how well the fighter performed.
-- **Skill Implementation**: a 0–10 rating for how often the fighter *attempted* to use a given skill
-  (box, kickbox, wrestle, clinch, grapple, etc.).
-
-### 3) Ratings Scale
-All ratings use a 0–10 scale.
-
-- **0** = did not show at all
-- **5** = average/neutral
-- **10** = dominant/constant
-
-You can also add text notes per fight for nuance.
-
-## Files
-
-- `app/` contains the local browser app (HTML/CSS/JS).
-- `schemas/` contains JSON schemas for validating data.
-- `docs/data-model.md` explains the data structure and relationships.
-
-## Next Steps (Optional)
-
-- Add charts for skill trends over time.
-- Add round-by-round scoring notes.
-- Build a backend for multi-user access.
+- This project pulls from publicly accessible pages/endpoints and uses a desktop browser User-Agent.
+- Always verify and comply with each source's terms of use and robots/rate limits before production deployment.
+- Website markup changes can break scrapers; selectors are intentionally defensive and should be monitored.

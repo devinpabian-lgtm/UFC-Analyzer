@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UFC Intelligence Hub</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>UFC Intelligence Hub</h1>
+      <p>
+        Live UFC pulse for fans: breaking news, fight announcements, rankings movement, betting
+        markets, and fan buzz.
+      </p>
+      <button id="refresh">Refresh feed</button>
+      <small id="timestamp"></small>
+    </header>
+
+    <main class="grid">
+      <section>
+        <h2>Breaking News</h2>
+        <ul id="news"></ul>
+      </section>
+
+      <section>
+        <h2>Latest Fight Announcements</h2>
+        <ul id="announcements"></ul>
+      </section>
+
+      <section>
+        <h2>Rankings Tracker</h2>
+        <div id="rankings"></div>
+      </section>
+
+      <section>
+        <h2>Betting Odds (Top Markets)</h2>
+        <p id="oddsStatus"></p>
+        <ul id="odds"></ul>
+      </section>
+
+      <section>
+        <h2>Fan Interaction Feed</h2>
+        <ul id="buzz"></ul>
+      </section>
+
+      <section>
+        <h2>Fighter Profiles & Fight History</h2>
+        <p>
+          This starter integrates live data feeds first. Next, connect UFCStats or an internal DB
+          for detailed fighter profiles, full fight logs, and matchup analytics.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Data from UFC public pages + community feeds. Respect source terms and rate limits before
+        production deployment.
+      </p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
